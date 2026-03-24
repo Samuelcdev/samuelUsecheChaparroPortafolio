@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  background-color: #fffdf0;
+  background-image:
+    linear-gradient(0deg, rgba(31, 41, 55, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 41, 55, 0.06) 1px, transparent 1px),
+    radial-gradient(circle at 80% 10%, rgba(255, 217, 102, 0.35) 0%, transparent 55%),
+    radial-gradient(circle at 10% 20%, rgba(255, 235, 160, 0.45) 0%, transparent 60%);
+  background-size: 28px 28px, 28px 28px, 520px 520px, 420px 420px;
+  background-attachment: fixed;
+  color: #111827;
+}
+
+@layer components {
+  .pixel-card {
+    @apply rounded-card border-2 border-ink-900 bg-white/90 shadow-pixel;
+  }
+
+  .pixel-chip {
+    @apply inline-flex items-center gap-2 rounded-full border-2 border-ink-900 bg-butter-100 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-ink-900;
+  }
+
+  .pixel-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink-900 bg-butter-300 px-5 py-3 text-sm font-semibold uppercase tracking-widest text-ink-900 shadow-pixel transition-transform duration-150;
+  }
+
+  .pixel-btn:hover {
+    @apply -translate-y-0.5;
+  }
+
+  .pixel-btn:active {
+    @apply translate-y-0.5 shadow-none;
+  }
+
+  .pixel-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink-900 bg-white px-5 py-3 text-sm font-semibold uppercase tracking-widest text-ink-900 shadow-pixel;
+  }
+
+  .icon-tile {
+    @apply flex h-14 w-14 items-center justify-center rounded-xl border-2 border-ink-900 bg-butter-100 text-ink-900 shadow-pixel;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@layer utilities {
+  .marquee {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 1rem;
+    flex-shrink: 0;
+    min-width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+
+  .scanlines {
+    position: relative;@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+  }
+
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(17, 24, 39, 0.04) 0px,
+      rgba(17, 24, 39, 0.04) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+    opacity: 0.6;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
